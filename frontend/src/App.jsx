@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { FiUpload, FiSend, FiUser, FiCpu } from "react-icons/fi";
+import { FiUpload, FiSend, FiUser, FiCpu, FiFileText } from "react-icons/fi";
 import "./App.css";
 
 function App() {
   const [file, setFile] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,6 +38,7 @@ function App() {
         },
       });
       alert("File uploaded successfully!");
+      setUploadedFiles([...uploadedFiles, file.name]);
     } catch (error) {
       console.error("Error uploading file:", error);
       alert("Error uploading file.");
@@ -85,12 +87,33 @@ function App() {
             {loading ? "Uploading..." : "Upload Document"}
           </button>
         </div>
+        <div className="document-list">
+          <h3>Uploaded Documents</h3>
+          <ul>
+            {uploadedFiles.map((fileName, index) => (
+              <li key={index}>
+                <FiFileText />
+                <span>{fileName}</span>
+              </li>
+            ))}
+            {uploadedFiles.length === 0 && (
+              <li className="no-documents">No documents uploaded yet.</li>
+            )}
+          </ul>
+        </div>
       </div>
       <div className="chat-container">
         <header className="App-header">
           <h1>HR Onboarding Knowledge Assistant</h1>
         </header>
         <div className="chat-window" ref={chatWindowRef}>
+          {messages.length === 0 && !loading && (
+            <div className="welcome-message">
+              <FiCpu />
+              <h2>HR Knowledge Assistant</h2>
+              <p>Upload a document and ask me anything about it!</p>
+            </div>
+          )}
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
               <div className="message-icon">
