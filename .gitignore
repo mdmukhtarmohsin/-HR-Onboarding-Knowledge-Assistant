@@ -1,3 +1,15 @@
-__pycache__
+# Virtualenv
 venv/
+__pycache__/
+
+# Node modules
+node_modules/
+
+# Env
 .env
+
+# ChromaDB
+chroma_db/
+
+# Docs
+docs/
