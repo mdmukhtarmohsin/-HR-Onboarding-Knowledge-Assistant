@@ -70,7 +70,7 @@ def process_document(file_path):
 
     # Create vector embeddings and store them
     api_key = os.getenv("GOOGLE_API_KEY")
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key, request_options={"timeout": 600})
     vector_store = Chroma.from_texts(texts, embeddings, persist_directory="chroma_db")
     vector_store.persist()
 
@@ -84,7 +84,7 @@ def chat():
 
     # Load the vector store
     api_key = os.getenv("GOOGLE_API_KEY")
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key, request_options={"timeout": 600})
     vector_store = Chroma(persist_directory="chroma_db", embedding_function=embeddings)
 
     # Create the QA chain
