@@ -2,6 +2,9 @@
 
 This project is a web-based knowledge assistant designed to streamline the HR onboarding process. New hires can ask questions in natural language and get answers based on the documents provided, such as company policies, handbooks, and other onboarding materials.
 
+![HR Onboarding Assistant](./hr1.png)
+![HR Onboarding Interface](./hr2.png)
+
 ## Features
 
 - **Document Upload**: Upload PDF, DOCX, and TXT files containing onboarding information.
